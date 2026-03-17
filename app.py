@@ -1,5 +1,6 @@
-from flask import Flask, jsonify
 from flask import Flask, jsonify, request
+from flask import Flask, jsonify
+
 from flask import Flask, jsonify, request
 from flasgger import Swagger
 
@@ -28,35 +29,6 @@ def get_students():
 
 @app.route("/students", methods=["POST"])
 def add_student():
-    """
-    Add a new student
-    ---
-    parameters:
-      - in: body
-        name: body
-        required: true
-        schema:
-          type: object
-          required:
-            - name
-            - course
-            - grade
-          properties:
-            name:
-              type: string
-              example: Charlie
-            course:
-              type: string
-              example: History
-            grade:
-              type: integer
-              example: 88
-    responses:
-      201:
-        description: Student created successfully
-      400:
-        description: Invalid input
-    """
     data = request.get_json()
 
     # check if request body exists
@@ -83,21 +55,6 @@ def add_student():
 
 @app.route("/students/<int:id>", methods=["GET"])
 def get_student(id):
-    """
-    Get a student by ID
-    ---
-    parameters:
-      - in: path
-        name: id
-        type: integer
-        required: true
-        description: The student ID
-    responses:
-      200:
-        description: A student object
-      404:
-        description: Student not found
-    """
     for student in students:
         if student["id"] == id:
             return jsonify(student)
